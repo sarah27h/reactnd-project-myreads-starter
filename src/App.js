@@ -30,7 +30,7 @@ componentDidMount() {
       <div className="app">
 
         <Route path='/search' render={() => (
-          <SearchBooks/>
+          <SearchBooks books={this.state.books}/>
         )}/>
 
         <Route exact path='/' render={() => (
