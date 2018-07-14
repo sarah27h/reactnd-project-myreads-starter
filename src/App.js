@@ -21,6 +21,9 @@ componentDidMount() {
   BooksAPI.getAll().then((books) => {
     this.setState({ books });
     console.log(books);
+    books.map((book) => {
+      console.log(book.title, book.id, book.shelf);
+    })    
   })
 
 }
@@ -30,11 +33,11 @@ componentDidMount() {
       <div className="app">
 
         <Route path='/search' render={() => (
-          <SearchBooks books={this.state.books}/>
+          <SearchBooks/>
         )}/>
 
         <Route exact path='/' render={() => (
-          <ListBooks/>
+          <ListBooks books={this.state.books}/>
         )}/>
 
       </div>
