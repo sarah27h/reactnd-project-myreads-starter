@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
+// {this.props.onupdate(book, book.shelf, value)}
+
 class ListBooks extends Component {
+  state = {value: ''};
+
+// handleChange = (event) => {
+//   this.setState({value: event.target.value});
+//   this.props.onupdate(this.state.value);
+//   console.log(this.state.value);
+// }
+
     render() {
         return(
             <div className="list-books">
@@ -20,13 +31,15 @@ class ListBooks extends Component {
                                 <div className="book-top">
                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                                     <div className="book-shelf-changer">
-                                    <select>
+
+                                    <select value='currentlyReading' onChange={(event) => {this.setState({value: event.target.value}); this.props.onShelfChange(book, book.shelf, event.target.value)} }>
                                         <option value="move" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
                                         <option value="wantToRead">Want to Read</option>
                                         <option value="read">Read</option>
                                         <option value="none">None</option>
                                     </select>
+
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>
@@ -47,13 +60,15 @@ class ListBooks extends Component {
                                 <div className="book-top">
                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                                     <div className="book-shelf-changer">
-                                    <select>
+
+                                    <select value='wantToRead' onChange={(event) => {this.setState({value: event.target.value}); this.props.onShelfChange(book, book.shelf, event.target.value)} }>
                                         <option value="move" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
                                         <option value="wantToRead">Want to Read</option>
                                         <option value="read">Read</option>
                                         <option value="none">None</option>
                                     </select>
+
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>
@@ -74,13 +89,15 @@ class ListBooks extends Component {
                                 <div className="book-top">
                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
                                     <div className="book-shelf-changer">
-                                    <select>
+
+                                    <select value='read' onChange={(event) => {this.setState({value: event.target.value}); this.props.onShelfChange(book, book.shelf, event.target.value)} }>
                                         <option value="move" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
                                         <option value="wantToRead">Want to Read</option>
                                         <option value="read">Read</option>
                                         <option value="none">None</option>
                                     </select>
+
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>

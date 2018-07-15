@@ -23,10 +23,29 @@ componentDidMount() {
     console.log(books);
     books.map((book) => {
       console.log(book.title, book.id, book.shelf);
-    })    
+    })
   })
 
 }
+
+
+shelfChange = (book, shelf, value) => {
+  console.log(book, shelf, value);
+
+  BooksAPI.update(book, value).then(() => {
+
+    BooksAPI.getAll().then(books => {
+      this.setState({ books });
+      // check that books state update
+      //after shelf change
+      console.log(this.state.books); 
+    });
+    
+  });
+  
+  console.log(this.state.books);
+}
+
 
   render() {
     return (
@@ -37,7 +56,9 @@ componentDidMount() {
         )}/>
 
         <Route exact path='/' render={() => (
-          <ListBooks books={this.state.books}/>
+          <ListBooks 
+          books={this.state.books}
+          onShelfChange={this.shelfChange}/>
         )}/>
 
       </div>
