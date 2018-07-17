@@ -21,6 +21,7 @@ componentDidMount() {
   BooksAPI.getAll().then((books) => {
     this.setState({ books });
     console.log(books);
+    console.log(typeof(books));
     books.map((book) => {
       console.log(book.title, book.id, book.shelf);
     })
@@ -38,7 +39,7 @@ shelfChange = (book, shelf, value) => {
       this.setState({ books });
       // check that books state update
       //after shelf change
-      console.log(this.state.books); 
+      console.log(this.state.books);
     });
     
   });
@@ -52,7 +53,8 @@ shelfChange = (book, shelf, value) => {
       <div className="app">
 
         <Route path='/search' render={() => (
-          <SearchBooks/>
+          <SearchBooks
+          onShelfChange={this.shelfChange}/>
         )}/>
 
         <Route exact path='/' render={() => (

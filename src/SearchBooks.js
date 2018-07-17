@@ -6,7 +6,8 @@ class SearchBooks extends Component {
 
     state = {
         query: '',
-        searchResults: []
+        searchResults: [],
+        value: ''
     }
 
     updateQuery = (query) => {
@@ -103,7 +104,7 @@ class SearchBooks extends Component {
                                     
                                         <div className="book-shelf-changer">
     
-                                        <select value='currentlyReading' onChange={(event) => {this.setState({value: event.target.value}); this.props.onShelfChange(book, book.shelf, event.target.value)} }>
+                                        <select value='none' onChange={(event) => {this.setState({value: event.target.value}, (value) => {console.log(this.state.value); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>
                                             <option value="move" disabled>Move to...</option>
                                             <option value="currentlyReading">Currently Reading</option>
                                             <option value="wantToRead">Want to Read</option>
