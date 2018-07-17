@@ -14,7 +14,7 @@ class SearchBooks extends Component {
         // this.setState is asynchronous
         // If you want to run code after the state update
         // you need to pass in a callback
-        this.setState({ query: query }, () => {
+        this.setState({ query: query,  searchResults : [] }, () => {
             if (this.state.query !== '') {
             
                 console.log(query);
