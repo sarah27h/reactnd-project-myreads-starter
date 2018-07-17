@@ -10,19 +10,25 @@ class SearchBooks extends Component {
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query });
-        if (this.state.query && this.state.query.length > 1) {
-            
-            console.log(query);
-            BooksAPI.search(this.state.query).then((results) => {
-                this.setState({ searchResults : results });
-                console.log(this.state.query);
-                console.log(this.state.searchResults);
-                console.log(this.state.searchResults.length);                
-                console.log(results);
 
-            })
-        }
+        // this.setState is asynchronous
+        // If you want to run code after the state update
+        // you need to pass in a callback
+        this.setState({ query: query }, () => {
+            if (this.state.query !== '') {
+            
+                console.log(query);
+                BooksAPI.search(this.state.query).then((results) => {
+                    this.setState({ searchResults : results });
+                    console.log(this.state.query);
+                    console.log(this.state.searchResults);
+                    console.log(this.state.searchResults.length);                
+                    console.log(results);
+    
+                })
+            }
+        });
+        
     }
 
     // updateQuery = (query) => {
