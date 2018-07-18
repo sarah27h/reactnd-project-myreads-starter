@@ -54,6 +54,7 @@ shelfChange = (book, shelf, value) => {
 
         <Route path='/search' render={() => (
           <SearchBooks
+          books={this.state.books}
           onShelfChange={this.shelfChange}/>
         )}/>
 

@@ -7,7 +7,7 @@ class SearchBooks extends Component {
     state = {
         query: '',
         searchResults: [],
-        value: ''
+        value: 'none'
     }
 
     updateQuery = (query) => {
@@ -15,12 +15,26 @@ class SearchBooks extends Component {
         // this.setState is asynchronous
         // If you want to run code after the state update
         // you need to pass in a callback
-        this.setState({ query: query,  searchResults : [] }, () => {
+        this.setState({ query: query, searchResults: [] }, () => {
             if (this.state.query !== '') {
             
                 console.log(query);
                 BooksAPI.search(this.state.query).then((results) => {
-                    this.setState({ searchResults : results });
+                    this.setState({ searchResults : results },() => {
+                        // add shelf property for book if it is already in my library (books array)
+                        this.state.searchResults.map((searchedbook, index) => {
+                            this.props.books.map((book) => {
+                                if(searchedbook.id === book.id) {
+                                    searchedbook.shelf = book.shelf;
+                                    this.setState({ value: searchedbook.shelf });
+                                } else {
+                                    this.setState({ value: 'none' });
+                                }
+                                
+                            })
+                            console.log(searchedbook.shelf, index );
+                        });
+                    });
                     console.log(this.state.query);
                     console.log(this.state.searchResults);
                     console.log(this.state.searchResults.length);                
@@ -31,6 +45,11 @@ class SearchBooks extends Component {
         });
         
     }
+
+    // handleChange(event) {
+        
+    //     this.setState({value: event.target.value});
+    //   }
 
     // updateQuery = (query) => {
     //     this.setState({ query: query });
@@ -89,7 +108,7 @@ class SearchBooks extends Component {
                         
                         <ol className="books-grid">
                        
-                        {this.state.searchResults.map((book) => (
+                        {this.state.searchResults.map((book, index) => (
                             <li key={book.id}>
                                 <div className="book">
                                     <div className="book-top">
@@ -103,8 +122,8 @@ class SearchBooks extends Component {
                                         )}
                                     
                                         <div className="book-shelf-changer">
-    
-                                        <select value='none' onChange={(event) => {this.setState({value: event.target.value}, (value) => {console.log(this.state.value); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>
+                                        
+                                        <select  value={typeof book.shelf !== 'undefined'? book.shelf : this.state.value} onChange={(event) => { this.setState({value: event.target.value }, (value) => { console.log(this.state.value, book.shelf); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>                                       
                                             <option value="move" disabled>Move to...</option>
                                             <option value="currentlyReading">Currently Reading</option>
                                             <option value="wantToRead">Want to Read</option>
