@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 class SearchBooks extends Component {
 
@@ -8,6 +9,10 @@ class SearchBooks extends Component {
         query: '',
         searchResults: [],
         value: 'none'
+    }
+
+    updateShelf = (book, shelf, value) => {
+        this.props.onShelfChange(book, shelf, value);
     }
 
     updateQuery = (query) => {
@@ -110,41 +115,15 @@ class SearchBooks extends Component {
                         
                         <ol className="books-grid">
                        
-                        {this.state.searchResults.map((book, index) => (
-                            <li key={book.id}>
-                                <div className="book">
-                                    <div className="book-top">
+                            {this.state.searchResults.map((book, index) => (
+                                
+                                <li key={book.id}>
 
-                                        {typeof book.imageLinks === 'undefined'? 
-                                        (<div className="book-cover" style={{ width: 128, height: 193, 
-                                            backgroundImage: `url(http://via.placeholder.com/128x193?text=no%20image)`}}></div>
-                                          )  : (
-                                             <div className="book-cover" style={{ width: 128, height: 193, 
-                                            backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                                        )}
-                                    
-                                        <div className="book-shelf-changer">
-                                        
-                                        <select onChange={event => this.props.onShelfChange(book, book.shelf, event.target.value)}>                                       
-                                            <option value="move" disabled>Move to...</option>
-                                            <option value="currentlyReading" selected={book.shelf === 'currentlyReading'}>Currently Reading</option>
-                                            <option value="wantToRead" selected={book.shelf === 'wantToRead'}>Want to Read</option>
-                                            <option value="read" selected={book.shelf === 'read'}>Read</option>
-                                            <option value="none" selected={typeof book.shelf === 'undefined'}>None</option>
-                                        </select>
-    
-                                        </div>
-                                    </div>
-                                    <div className="book-title">{book.title}</div>
-                                    {typeof book.authors === 'undefined'?
-                                    (
-                                        <div className="book-authors">{'Name Unkown'}</div>
-                                    ) : (
-                                        <div className="book-authors">{book.authors}</div>
-                                    )}  
-                                                                     
-                                </div>
-                            </li>
+                                    <Book 
+                                        book={book}
+                                        onShelfChange={this.updateShelf}/>
+
+                                </li>
                             ))}
                         </ol>
                     </div>
