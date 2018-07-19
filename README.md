@@ -19,8 +19,8 @@ This project built using React.
 
 - download zip folder or clone project > https://github.com/sarah27h/reactnd-project-myreads-starter.git
 - cd to your project directory then:
-    install all project dependencies with `npm install`
-    open project in browser and start the development server with `npm start`
+    - install all project dependencies with `npm install`
+    - open project in browser and start the development server with `npm start`
 
 
 ## Backend Server
