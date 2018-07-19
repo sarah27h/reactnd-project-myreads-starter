@@ -28,9 +28,9 @@ class SearchBooks extends Component {
                                     if(searchedbook.id === book.id) {
                                         searchedbook.shelf = book.shelf;
                                         this.setState({ value: searchedbook.shelf });
-                                    } else {
+                                    } /*else {
                                         this.setState({ value: 'none' });
-                                    }
+                                    }*/
                                     
                                 })
                                 console.log(searchedbook.shelf, index );
@@ -125,12 +125,12 @@ class SearchBooks extends Component {
                                     
                                         <div className="book-shelf-changer">
                                         
-                                        <select  value={'none'} onChange={event => this.props.onShelfChange(book, book.shelf, event.target.value)}>                                       
+                                        <select onChange={event => this.props.onShelfChange(book, book.shelf, event.target.value)}>                                       
                                             <option value="move" disabled>Move to...</option>
                                             <option value="currentlyReading" selected={book.shelf === 'currentlyReading'}>Currently Reading</option>
                                             <option value="wantToRead" selected={book.shelf === 'wantToRead'}>Want to Read</option>
                                             <option value="read" selected={book.shelf === 'read'}>Read</option>
-                                            <option value="none">None</option>
+                                            <option value="none" selected={typeof book.shelf === 'undefined'}>None</option>
                                         </select>
     
                                         </div>
