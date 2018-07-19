@@ -22,18 +22,19 @@ class SearchBooks extends Component {
                 BooksAPI.search(this.state.query).then((results) => {
                     this.setState({ searchResults : results },() => {
                         // add shelf property for book if it is already in my library (books array)
-                        this.state.searchResults.map((searchedbook, index) => {
-                            this.props.books.map((book) => {
-                                if(searchedbook.id === book.id) {
-                                    searchedbook.shelf = book.shelf;
-                                    this.setState({ value: searchedbook.shelf });
-                                } else {
-                                    this.setState({ value: 'none' });
-                                }
-                                
-                            })
-                            console.log(searchedbook.shelf, index );
-                        });
+                            this.state.searchResults.map((searchedbook, index) => {
+                                this.props.books.map((book) => {
+                                    if(searchedbook.id === book.id) {
+                                        searchedbook.shelf = book.shelf;
+                                        this.setState({ value: searchedbook.shelf });
+                                    } else {
+                                        this.setState({ value: 'none' });
+                                    }
+                                    
+                                })
+                                console.log(searchedbook.shelf, index );
+                            });
+                        
                     });
                     console.log(this.state.query);
                     console.log(this.state.searchResults);
@@ -123,11 +124,11 @@ class SearchBooks extends Component {
                                     
                                         <div className="book-shelf-changer">
                                         
-                                        <select  value={typeof book.shelf !== 'undefined'? book.shelf : this.state.value} onChange={(event) => { this.setState({value: event.target.value }, (value) => { console.log(this.state.value, book.shelf); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>                                       
+                                        <select  value={'none'} onChange={event => this.props.onShelfChange(book, book.shelf, event.target.value)}>                                       
                                             <option value="move" disabled>Move to...</option>
-                                            <option value="currentlyReading">Currently Reading</option>
-                                            <option value="wantToRead">Want to Read</option>
-                                            <option value="read">Read</option>
+                                            <option value="currentlyReading" selected={book.shelf === 'currentlyReading'}>Currently Reading</option>
+                                            <option value="wantToRead" selected={book.shelf === 'wantToRead'}>Want to Read</option>
+                                            <option value="read" selected={book.shelf === 'read'}>Read</option>
                                             <option value="none">None</option>
                                         </select>
     
