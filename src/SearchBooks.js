@@ -136,7 +136,13 @@ class SearchBooks extends Component {
                                         </div>
                                     </div>
                                     <div className="book-title">{book.title}</div>
-                                    <div className="book-authors">{book.authors}</div>
+                                    {typeof book.authors === 'undefined'?
+                                    (
+                                        <div className="book-authors">{'Name Unkown'}</div>
+                                    ) : (
+                                        <div className="book-authors">{book.authors}</div>
+                                    )}  
+                                                                     
                                 </div>
                             </li>
                             ))}
@@ -208,7 +214,7 @@ class SearchBooks extends Component {
                         <div className="books-grid">
                             <p>No results found.</p>
                         </div>
-                        
+
                     </div>
                 </div>
     
