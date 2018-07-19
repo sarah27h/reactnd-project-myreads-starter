@@ -11,9 +11,9 @@ class SearchBooks extends Component {
         value: 'none'
     }
 
-    // updateShelf = (book, shelf, value) => {
-    //     this.props.onShelfChange(book, shelf, value);
-    // }
+    updateShelf = (book, shelf, value) => {
+        this.props.onShelfChange(book, shelf, value);
+    }
 
     updateQuery = (query) => {
 
@@ -81,7 +81,8 @@ class SearchBooks extends Component {
 
                                     <Book 
                                         book={book}
-                                        onShelfChange={this.props.onShelfChange}/>
+                                        onShelfChange={this.props.onShelfChange}
+                                        /*onShelfChange={this.updateShelf}*//>
 
                                 </li>
                             ))}
