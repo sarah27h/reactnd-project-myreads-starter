@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import Book from './Book'
 
 // {this.props.onupdate(book, book.shelf, value)}
 
@@ -12,6 +12,10 @@ class ListBooks extends Component {
 //   this.props.onupdate(this.state.value);
 //   console.log(this.state.value);
 // }
+
+updateShelf = (book, shelf, value) => {
+    this.props.onShelfChange(book, shelf, value);
+}
 
     render() {
         return(
@@ -27,26 +31,12 @@ class ListBooks extends Component {
                     <ol className="books-grid">
                     {this.props.books.filter((book) => book.shelf === 'currentlyReading').map((book) => (
                         <li key={book.id}>
-                            <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                                    <div className="book-shelf-changer">
-
-                                    <select value='currentlyReading' onChange={(event) => {this.setState({value: event.target.value}, (value) => {console.log(this.state.value); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>
-                                        <option value="move" disabled>Move to...</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="read">Read</option>
-                                        <option value="none">None</option>
-                                    </select>
-
-                                    </div>
-                                </div>
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors}</div>
-                            </div>
+                            <Book 
+                                book={book}
+                                onShelfChange={this.updateShelf}/>
                         </li>
                         ))}
+                        
                     </ol>
                   </div>
                 </div>
@@ -54,27 +44,12 @@ class ListBooks extends Component {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.filter((book) => book.shelf === 'wantToRead').map((book) => (
-                        <li key={book.id}>
-                            <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                                    <div className="book-shelf-changer">
-
-                                    <select value='wantToRead' onChange={(event) => {this.setState({value: event.target.value}, (value) => {console.log(this.state.value); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>
-                                        <option value="move" disabled>Move to...</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="read">Read</option>
-                                        <option value="none">None</option>
-                                    </select>
-
-                                    </div>
-                                </div>
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors}</div>
-                            </div>
-                        </li>
+                        {this.props.books.filter((book) => book.shelf === 'wantToRead').map((book) => (
+                            <li key={book.id}>
+                                <Book 
+                                    book={book}
+                                    onShelfChange={this.updateShelf}/>
+                            </li>
                         ))}
                     </ol>
                   </div>
@@ -83,27 +58,12 @@ class ListBooks extends Component {
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.filter((book) => book.shelf === 'read').map((book) => (
-                        <li key={book.id}>
-                            <div className="book">
-                                <div className="book-top">
-                                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                                    <div className="book-shelf-changer">
-
-                                    <select value='read' onChange={(event) => {this.setState({value: event.target.value}, (value) => {console.log(this.state.value); this.props.onShelfChange(book, book.shelf, this.state.value)})} }>
-                                        <option value="move" disabled>Move to...</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="read">Read</option>
-                                        <option value="none">None</option>
-                                    </select>
-
-                                    </div>
-                                </div>
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors}</div>
-                            </div>
-                        </li>
+                        {this.props.books.filter((book) => book.shelf === 'read').map((book) => (
+                            <li key={book.id}>
+                                <Book 
+                                    book={book}
+                                    onShelfChange={this.updateShelf}/>
+                            </li>
                         ))}
                     </ol>
                   </div>
