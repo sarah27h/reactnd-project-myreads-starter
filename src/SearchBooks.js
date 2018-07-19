@@ -22,6 +22,7 @@ class SearchBooks extends Component {
                 BooksAPI.search(this.state.query).then((results) => {
                     this.setState({ searchResults : results },() => {
                         // add shelf property for book if it is already in my library (books array)
+                        if (this.state.searchResults.length > 0) {
                             this.state.searchResults.map((searchedbook, index) => {
                                 this.props.books.map((book) => {
                                     if(searchedbook.id === book.id) {
@@ -34,7 +35,7 @@ class SearchBooks extends Component {
                                 })
                                 console.log(searchedbook.shelf, index );
                             });
-                        
+                        }
                     });
                     console.log(this.state.query);
                     console.log(this.state.searchResults);
@@ -147,7 +148,7 @@ class SearchBooks extends Component {
 
         }
 
-        else if(this.state.query !== '' && this.state.searchResults.length !== 20) {
+        else if(this.state.searchResults.length === 0) {
             return(
                 <div className="search-books">
                     <div className="search-books-bar">
@@ -171,9 +172,8 @@ class SearchBooks extends Component {
                     </div>
                     <div className="search-books-results">
                         
-                        <div className="books-grid">
-                            <p>No results found.</p>
-                        </div>
+                        <ol className="books-grid">
+                        </ol>
 
                     </div>
                 </div>
@@ -205,8 +205,10 @@ class SearchBooks extends Component {
                     </div>
                     <div className="search-books-results">
                         
-                        <ol className="books-grid">
-                        </ol>
+                        <div className="books-grid">
+                            <p>No results found.</p>
+                        </div>
+                        
                     </div>
                 </div>
     
