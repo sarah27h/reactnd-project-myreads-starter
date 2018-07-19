@@ -29,12 +29,13 @@ updateShelf = (book, shelf, value) => {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.filter((book) => book.shelf === 'currentlyReading').map((book) => (
-                        <li key={book.id}>
-                            <Book 
-                                book={book}
-                                onShelfChange={this.updateShelf}/>
-                        </li>
+
+                        {this.props.books.filter((book) => book.shelf === 'currentlyReading').map((book) => (
+                            <li key={book.id}>
+                                <Book 
+                                    book={book}
+                                    onShelfChange={this.updateShelf}/>
+                            </li>
                         ))}
                         
                     </ol>
@@ -44,6 +45,7 @@ updateShelf = (book, shelf, value) => {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
+
                         {this.props.books.filter((book) => book.shelf === 'wantToRead').map((book) => (
                             <li key={book.id}>
                                 <Book 
@@ -51,6 +53,7 @@ updateShelf = (book, shelf, value) => {
                                     onShelfChange={this.updateShelf}/>
                             </li>
                         ))}
+
                     </ol>
                   </div>
                 </div>
@@ -58,6 +61,7 @@ updateShelf = (book, shelf, value) => {
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
+
                         {this.props.books.filter((book) => book.shelf === 'read').map((book) => (
                             <li key={book.id}>
                                 <Book 
@@ -65,6 +69,7 @@ updateShelf = (book, shelf, value) => {
                                     onShelfChange={this.updateShelf}/>
                             </li>
                         ))}
+                        
                     </ol>
                   </div>
                 </div>
