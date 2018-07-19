@@ -20,6 +20,7 @@ class SearchBooks extends Component {
         // this.setState is asynchronous
         // If you want to run code after the state update
         // you need to pass in a callback
+        // clear searchResults to be sure prior search results are not shown
         this.setState({ query: query, searchResults: [] }, () => {
             if (this.state.query !== '') {
             
@@ -52,58 +53,17 @@ class SearchBooks extends Component {
         });
         
     }
-
-    // handleChange(event) {
-        
-    //     this.setState({value: event.target.value});
-    //   }
-
-    // updateQuery = (query) => {
-    //     this.setState({ query: query });
-    //     console.log(query);
-    // }
-
-    // componentDidMount() {
-    //     BooksAPI.search(this.state.query).then((results) => {
-    //         this.setState({ searchResults : results });
-    //         console.log(this.state.query);
-    //         console.log(results);
-    //     })
-
-    //   }
-
-      
-    // updateQuery (query) {
-
-    //     this.setState({ query: query });
-    //     console.log(query);
-    //     BooksAPI.search(this.state.query).then(function(results){
-    //         this.setState({ searchResults : results });
-    //         console.log(this.state.query);
-    //         console.log(this.state.searchResults);
-    //         console.log(results);
-    //     })
- 
-    // }
-    
     
     render() {
 
+        // return this screen to display books returened after user enter in search field
         if(this.state.query !== '' && this.state.searchResults.length === 20) {
             return(
                 <div className="search-books">
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                        {/*
-                            NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                            You can find these search terms here:
-                            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-    
-                            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                            you don't find a specific author or title. Every search is limited by search terms.
-                        */}
-    
+                    
                         <input type="text" 
                         placeholder="Search by title or author"
                         value={this.state.query}
@@ -133,25 +93,19 @@ class SearchBooks extends Component {
 
         }
 
+        // return blank screen when all of 
+        // the text is deleted out of the search input box
         else if(this.state.searchResults.length === 0) {
             return(
                 <div className="search-books">
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                        {/*
-                            NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                            You can find these search terms here:
-                            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-    
-                            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                            you don't find a specific author or title. Every search is limited by search terms.
-                        */}
-    
-                        <input type="text" 
-                        placeholder="Search by title or author"
-                        value={this.state.query}
-                        onChange={(event) => {this.updateQuery(event.target.value)}} />
+                        
+                            <input type="text" 
+                            placeholder="Search by title or author"
+                            value={this.state.query}
+                            onChange={(event) => {this.updateQuery(event.target.value)}} />
                         
                         </div>
                     </div>
@@ -166,25 +120,18 @@ class SearchBooks extends Component {
             )
 
         }
+        // return screen with No results found when user enter invalid queries
         else {
             return(
                 <div className="search-books">
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                        {/*
-                            NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                            You can find these search terms here:
-                            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-    
-                            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                            you don't find a specific author or title. Every search is limited by search terms.
-                        */}
-    
-                        <input type="text" 
-                        placeholder="Search by title or author"
-                        value={this.state.query}
-                        onChange={(event) => {this.updateQuery(event.target.value)}} />
+        
+                            <input type="text" 
+                            placeholder="Search by title or author"
+                            value={this.state.query}
+                            onChange={(event) => {this.updateQuery(event.target.value)}} />
                         
                         </div>
                     </div>

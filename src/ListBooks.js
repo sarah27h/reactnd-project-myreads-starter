@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book'
 
-// {this.props.onupdate(book, book.shelf, value)}
-
 class ListBooks extends Component {
   state = {value: ''};
 
-// handleChange = (event) => {
-//   this.setState({value: event.target.value});
-//   this.props.onupdate(this.state.value);
-//   console.log(this.state.value);
-// }
 
 updateShelf = (book, shelf, value) => {
     this.props.onShelfChange(book, shelf, value);
