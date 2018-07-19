@@ -6,9 +6,9 @@ class ListBooks extends Component {
   state = {value: ''};
 
 
-updateShelf = (book, shelf, value) => {
-    this.props.onShelfChange(book, shelf, value);
-}
+// updateShelf = (book, shelf, value) => {
+//     this.props.onShelfChange(book, shelf, value);
+// }
 
     render() {
         return(
@@ -27,7 +27,7 @@ updateShelf = (book, shelf, value) => {
                             <li key={book.id}>
                                 <Book 
                                     book={book}
-                                    onShelfChange={this.updateShelf}/>
+                                    onShelfChange={this.props.onShelfChange}/>
                             </li>
                         ))}
                         
